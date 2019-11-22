@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /sensitive_info
+/src/sensitive_info
 /.pnp
 .pnp.js
 

@@ -1,26 +1,23 @@
 import React, { Component } from 'react';
-//import API_Key from './key.json';
+import API_Key from '../../../sensitive_info/key.json';
+const https = require('./Caller');
 
-const userAction = async () => {
-  const response = await fetch('', {
-    method: 'GET',
-    //body: myBody, // string or object
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  });
-  const myJson = await response.json(); //extract JSON from the http response
-  console.log(myJson);
-}
+let url = `https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/saint%20sloth?api_key=${API_Key}`;
+console.log(url);
 
 class HomePage extends Component {
+  constructor(props){
+    super(props);
+    https.makeCall(url);
+  }
+
   render(){
     return (
       <>
         <h1>
           Goodybye App.js!
         </h1>
-        <button onClick={userAction}>Button beep boop</button>
+        <button>Button beep boop</button>
       </>
     )
   }
