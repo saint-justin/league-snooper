@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/sensitive_info
 /.pnp
 .pnp.js
 
