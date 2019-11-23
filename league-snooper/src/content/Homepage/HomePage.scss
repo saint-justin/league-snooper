@@ -1,1 +1,19 @@
-@import '../../components/Search/Search.scss'
+@import '../../components/Search/Search.scss';
+
+.page-wrapper{
+    background-image: url('../../assets/bg_00.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    //justify-content: center;
+    align-items: center;
+
+    img{
+        width: 30vw;
+        margin: 20vh 0 5vh 0;
+    }
+}
