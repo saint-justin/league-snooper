@@ -1,15 +1,11 @@
-// TODO:
-// Replace me with all the actions needed to load files from DDragon
+// All API calls should be routed through here
+const base_url = `https://urs4qc0abj.execute-api.us-east-2.amazonaws.com/rgapi/`;
 
-export const increment = (_number=1) =>{
-    return {
-        type: 'INCREMENT',
-        payload: _number
-    }
-}
+export const ApiCall = (_region, _summoner) => {
+  let full_url = base_url + 'summoner/' + _region + _summoner;
 
-export const decrement = () => {
-    return {
-        type: 'DECREMENT'
-    }
+  return {
+    type: 'GET_SUMM',
+    payload: full_url
+  }
 }

@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import placeholderReducer from './placeholderReducer';
+import RGAPI_Calls from './RGAPI_Caller';
 
 const combinedReducer = combineReducers({
-  placeholder: placeholderReducer
+  RGAPI_Calls: RGAPI_Calls
 })
 
 export default combinedReducer;
