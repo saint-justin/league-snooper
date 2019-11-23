@@ -1,7 +1,10 @@
 const https = require('https');
-function makeCall(_URL){
+
+function makeCall(_url, _server, _summoner){
+  let fullURL = `${_url}/${_server}/${_summoner}`;
+
   return new Promise(function(resolve, reject){
-    https.get(_URL, (response) => {
+    https.get(fullURL, (response) => {
       let data = '';
       response.on('data', (chunk) => {
         data += chunk;
