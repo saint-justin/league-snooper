@@ -21,7 +21,7 @@ class Search extends Component {
             <option href="/" value="EU1">EU2</option>
             <option href="/" value="EU2">EU3</option>
           </select>
-          <input type="text" name="summoner-name" className="search-core search-input-box"></input>
+          <input type="text" name="summoner-name" className="search-core search-input-box" placeholder="Summoner Name"></input>
           <button href="/" className="search-core search-button"><FontAwesomeIcon icon={faSearch} /></button>
         </form>
       </>

@@ -2,13 +2,14 @@ $card-width: 22.5%;
 
 .card-wrapper{
     //width: 308px;
-    //height: 560px;
+    width: 20%;
+    height: 450px;
     //height: $card-width*1.81;
     background-color: green;
     display: flex;
 
     .card-img {
         width: 100%;
-        //width: auto;
+        object-fit: cover;
     }
 }
