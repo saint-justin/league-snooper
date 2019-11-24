@@ -1,15 +1,63 @@
-$card-width: 22.5%;
+$card-width: 24%;
+$title-text: #FBDFAA;
 
 .card-wrapper{
-    //width: 308px;
-    width: 20%;
-    height: 450px;
-    //height: $card-width*1.81;
-    background-color: green;
-    display: flex;
+  width: $card-width;
+  height: 450px;
+  background-color: green;
+  display: flex;
+  position: relative;
+  margin-bottom: 2vh;
+  border: $input-border;
 
-    .card-img {
-        width: 100%;
-        object-fit: cover;
+  .splash-img {
+    width: 100%;
+    display: block;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 0;
+  }
+
+  // Rules below this in the wrapper should all be positioned on top of the splash
+  .mastery-img {
+    width: 30%;
+    position: absolute;
+    right: 8px;
+    top: 4px;
+    z-index: 1;
+  }
+
+  .mastery-stats{
+    position: absolute;
+    bottom: 0;
+
+    width: 100%;
+    height: 20%;
+    background-color: #000;
+    opacity: 80%;
+    text-align: center;
+    border-top: $input-border;
+
+    display: flex;
+    flex-direction: column;
+
+    h2{
+      color: $title-text;
+      margin-top: 5%;
     }
+
+    .mastery-progress{
+      height: 32px;
+      width: 100%;
+      background-color: green;
+      border-top: $input-border;
+
+      position: absolute;
+      bottom: 0;
+
+      display: flex;
+      flex-direction: row;
+    }
+  }
 }
