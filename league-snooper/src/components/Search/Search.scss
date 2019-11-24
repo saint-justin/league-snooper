@@ -8,6 +8,7 @@ $input-text-col: #FAEEE8;
 .search{
   display: inline-flex;
   height: 50px;
+  margin: 0 50%;
 }
 
 .search-core{
@@ -21,10 +22,6 @@ $input-text-col: #FAEEE8;
   padding: 12px;
   transition: 0.1s;
   height: $input-height;
-
-  option{
-    height: 5vh;
-  }
 }
 
 .search-input-box{

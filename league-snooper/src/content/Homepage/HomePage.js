@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Search from '../../components/Search';
+import Card from '../../components/Card';
 import Logo from '../../assets/title.png';
 
 class HomePage extends Component {
@@ -9,9 +10,14 @@ class HomePage extends Component {
     return (
       <div className="page-wrapper">
         <img src={Logo} id="logo"></img>
+        <Search />
         <div className="page-content">
-          <Search />
-          {/* Put in the gallery of all different assets here */}
+          <div id="info-cards">
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+          </div>
         </div>
       </div>
     )
