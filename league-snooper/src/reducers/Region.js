@@ -23,7 +23,7 @@ const region = (state='NA1', action) => {
         case 'RU':
             return 'RU';
         default:
-            console.log('ERROR: REGION NOT DEFINED');
+            //console.log('ERROR: REGION NOT DEFINED');
             return 'NA1';
     }
 }
