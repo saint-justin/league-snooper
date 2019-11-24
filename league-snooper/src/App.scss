@@ -1,6 +1,14 @@
+
+
 @import './content/Homepage/HomePage.scss';
 
 *{
     padding: 0;
     margin: 0;
+    outline: none;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+button:focus {
+    outline: 0;
 }

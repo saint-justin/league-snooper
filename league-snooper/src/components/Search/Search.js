@@ -16,16 +16,13 @@ class Search extends Component {
     return (
       <>
         <form className="search"> 
-          <div className="dropdown">
-            <button className="dropdown-btn">NA1</button>
-            <div className="dropdown-content">
-              <button href="/">NA1</button>
-              <button href="/">EU1</button>
-              <button href="/">EU2</button>
-            </div>
-          </div>
-          <input type="text" name="summoner-name"></input>
-          <button href="/"><FontAwesomeIcon icon={faSearch} /></button>
+          <select className="search-core search-dropdown" name="region">
+            <option href="/" value="NA1">NA1</option>
+            <option href="/" value="EU1">EU2</option>
+            <option href="/" value="EU2">EU3</option>
+          </select>
+          <input type="text" name="summoner-name" className="search-core search-input-box"></input>
+          <button href="/" className="search-core search-button"><FontAwesomeIcon icon={faSearch} /></button>
         </form>
       </>
     )
