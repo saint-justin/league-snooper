@@ -59,9 +59,11 @@ class Search extends Component {
         let newCardSet = [];
         for(let i=0; i<8; i++){
           let champNumber = this.state.calldata[i].championId;
-          let champName = this.state.champ_ids[champNumber];
           newCardSet.push(<Card
-            champName={champName}
+            champName={this.state.champ_ids[champNumber]}
+            champPoints={this.state.calldata[i].championPoints}
+            pointsToNext={this.state.calldata[i].championPointsUntilNextLevel}
+            masteryLevel={this.state.calldata[i].championLevel}
           />)
         }
         // Set the card list into the cards prop

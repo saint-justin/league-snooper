@@ -4,35 +4,57 @@ class Card extends Component {
 	constructor(props){
 		super(props);
 
+		/*
+		PASSED INFO
+		champName={this.state.champ_ids[champNumber]}
+    champPoints={this.state.calldata[i].championPoints}
+    pointsToNext={this.state.callData[i].championPointsUntilNextLevel}
+    masteryLevel={this.state.calldata[i].championLevel}
+		*/
+
+		// Format champion names for urls by removing spaces and apastrophes
+		const formatChampName = (_string) => {
+			return _string.replace(`'`, '').replace(' ', '');
+		}
+
 		this.state = {
-			splashLink: "http://ddragon.leagueoflegends.com/cdn/img/champion/loading/Aatrox_0.jpg",					// Dimensions: 308x560 rect
-			masteryLink: "http://raw.communitydragon.org/latest/game/assets/ux/mastery/mastery_icon_7.png", // Dimensions: 128x128 sq
+			splashLink: `http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${formatChampName(this.props.champName)}_0.jpg`,					// Dimensions: 308x560 rect
+			masteryLink: `http://raw.communitydragon.org/latest/game/assets/ux/mastery/mastery_icon_${this.props.masteryLevel}.png`, // Dimensions: 128x128 sq
 			champName: this.props.champName,
 			experiencePercent:{},
 			masteryExp: {
-				current: 50,
-				total: 200,
-				percent: 0
+				current: this.props.champPoints,
+				tillNext: this.props.pointsToNext,
+				percent: -1
 			}
 		}
 
-		let masteryPercent = 100 * (this.state.masteryExp.current / this.state.masteryExp.total);
-		this.state.experiencePercent = {
-			backgroundColor: '#3FD2D1',
-			width: `${masteryPercent}%`
+		if (this.state.masteryExp.tillNext > 1)
+		{
+			let masteryPercent = 100 * (this.state.masteryExp.current / (this.state.masteryExp.current + this.state.masteryExp.tillNext));
+			this.state.experiencePercent = {
+				backgroundColor: '#3FD2D1',
+				width: `${masteryPercent}%`
+			}
+		} else {
+			this.state.experiencePercent = {
+				backgroundColor: '#40DE3C',
+				width: `100%`
+			}
 		}
+
 	}
 
  render(){
   return (
     // NOTE: Default art size is 308x560
-    <div className="card-wrapper">
+    <div className="card-wrapper" key={this.state.champName}>
 			<img className="splash-img" src={this.state.splashLink} alt={`${this.state.champName} Splash`}></img>
 			<img className="mastery-img" src={this.state.masteryLink} alt="Mastery"></img>
 			<div className="mastery-stats">
 				<h2 className="champ-name">{this.state.champName}</h2>
 				<h3 className="mastery-progress-text">
-					{this.state.masteryExp.current} / {this.state.masteryExp.total} pts.
+					{this.state.masteryExp.current} pts.
 				</h3>
 				<div className="mastery-progress">
 					<div className="mastery-xp-complete" style={this.state.experiencePercent}></div>
