@@ -1,31 +1,27 @@
 import React, { Component } from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
-// import { CallRGAPI } from '../../actions'
+import Card from '../Card/Card'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
-//const https = require('../../reducers/Caller');
-//let base_url = `https://urs4qc0abj.execute-api.us-east-2.amazonaws.com/rgapi/summoner`;
-//let server = `na1`;
-//let summoner = `dyrus`;
-//console.log(url);
-
-const allRegions = ["NA1", "BR1", "EUN1", "EUW1", "JP1", "KR", "LA1", "LA2", "OC1", "TR1", "RU"];
+const allRegions = ["na1", "nr1", "eun1", "euw1", "jp1", "kr", "la1", "la2", "oc1", "tr1", "ru"];
 
 class Search extends Component {
   constructor(props){
     super(props);
 
     this.state = {
-      region: 'NA1',
-      summoner: ''
+      region: 'na1',
+      summoner: '',
+      base_url: `https://urs4qc0abj.execute-api.us-east-2.amazonaws.com/rgapi/`,
+      summonerdata: {},
+      calldata: {}
     }
 
+    // Bind all action handlers
     this.handleTextUpdate = this.handleTextUpdate.bind(this);
     this.handleRegionUpdate = this.handleRegionUpdate.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-
-    //const dispatch = useDispatch();
+    
   }
 
   // Handles updates to the region sectoin
@@ -39,15 +35,29 @@ class Search extends Component {
     this.setState({summoner: event.target.value});
   }
 
-  // Handles the submit button being pressed firing off api requests
+  // Handles the submit button being pressed and firing off api requests
   handleSubmit(event){
-    
+    event.preventDefault();
+
+    // Make the URL then call and get info from it
+    let fullURL = `${this.state.base_url}summoner/${this.state.region}/${this.state.summoner}`;
+    fetch(fullURL)
+    .then(response => response.json())
+    .then(data => this.setState({summonerdata: data}))
+    .then(() => {
+      // Once we have the player info, use that to get their mastery info
+      let masteryURL = `${this.state.base_url}mastery/${this.state.region}/${this.state.summonerdata.id}`;
+      console.log("MASTERY URL: " + masteryURL);
+      fetch(masteryURL)
+      .then(response => response.json())
+      .then(data => this.setState({calldata: data}))
+    })
   }
 
   // Generates <option> jsx syntax for each region passed in and returns the set
   generateRegions(_arr){
     let regionJSX = _arr.map((region) => {
-      return <option href="/" key={region} value={region}>{region}</option>
+      return <option href="/" key={region} value={region}>{region.toUpperCase()}</option>
     })
 
     return <>{regionJSX}</>
@@ -78,6 +88,16 @@ class Search extends Component {
             <FontAwesomeIcon icon={faSearch} />
           </button>
         </form>
+        <div id="info-cards">
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+          </div>
       </>
     )
   } 
