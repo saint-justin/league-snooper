@@ -35,4 +35,13 @@ $input-text-col: #FAEEE8;
   overflow: none;
   padding: 16px;
   height: $input-height;
+  transition: 0.15s;
+}
+
+.search-button:hover{
+  background-color: #AAA;
+}
+
+.search-button:active{
+  background-color: #888;
 }

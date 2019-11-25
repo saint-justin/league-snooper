@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import Card from '../Card/Card'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import Card from '../Card/Card';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import ChampIDs from './champions-default.json';
 
 const allRegions = ["na1", "nr1", "eun1", "euw1", "jp1", "kr", "la1", "la2", "oc1", "tr1", "ru"];
 
@@ -14,14 +15,14 @@ class Search extends Component {
       summoner: '',
       base_url: `https://urs4qc0abj.execute-api.us-east-2.amazonaws.com/rgapi/`,
       summonerdata: {},
-      calldata: {}
+      calldata: {},
+      champ_ids: ChampIDs,
+      cards: []
     }
-
     // Bind all action handlers
     this.handleTextUpdate = this.handleTextUpdate.bind(this);
     this.handleRegionUpdate = this.handleRegionUpdate.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    
   }
 
   // Handles updates to the region sectoin
@@ -44,14 +45,34 @@ class Search extends Component {
     fetch(fullURL)
     .then(response => response.json())
     .then(data => this.setState({summonerdata: data}))
+
+    // Once we have the player info, use that to get their mastery info
     .then(() => {
-      // Once we have the player info, use that to get their mastery info
       let masteryURL = `${this.state.base_url}mastery/${this.state.region}/${this.state.summonerdata.id}`;
       console.log("MASTERY URL: " + masteryURL);
       fetch(masteryURL)
       .then(response => response.json())
       .then(data => this.setState({calldata: data}))
-    })
+
+      // Once we have mastery info set into the state, make and populate the cards with all that information
+      .then(() => {
+        let newCardSet = [];
+        for(let i=0; i<8; i++){
+          let champNumber = this.state.calldata[i].championId;
+
+          console.log(this.state.champ_ids);
+
+          let champName = this.state.champ_ids[champNumber];
+          newCardSet.push(<Card
+            champName={champName}
+          />)
+        }
+        // Set the card list into the cards prop
+        this.setState({cards: newCardSet})
+      })
+      })
+
+
   }
 
   // Generates <option> jsx syntax for each region passed in and returns the set
@@ -61,6 +82,11 @@ class Search extends Component {
     })
 
     return <>{regionJSX}</>
+  }
+
+  // Generates all <Card /> elements that go into the hotloaded cards section
+  generateCards(){
+
   }
 
   render(){
@@ -89,14 +115,15 @@ class Search extends Component {
           </button>
         </form>
         <div id="info-cards">
+          {this.state.cards}
+            {/* <Card />
             <Card />
             <Card />
             <Card />
             <Card />
             <Card />
             <Card />
-            <Card />
-            <Card />
+            <Card /> */}
           </div>
       </>
     )

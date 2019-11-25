@@ -33,7 +33,7 @@ $title-text: #FBDFAA;
     bottom: 0;
 
     width: 100%;
-    height: 20%;
+    height: 22.5%;
     background-color: #000;
     opacity: 80%;
     text-align: center;
@@ -44,13 +44,19 @@ $title-text: #FBDFAA;
 
     h2{
       color: $title-text;
-      margin-top: 5%;
+      margin: 5% 0 2% 0;
+    }
+
+    h3{
+      color: $title-text;
+      //text-align: left;
+      padding-left: 8px;
+      font-size: 75%;
     }
 
     .mastery-progress{
-      height: 32px;
+      height: 25px;
       width: 100%;
-      background-color: green;
       border-top: $input-border;
 
       position: absolute;
@@ -58,6 +64,11 @@ $title-text: #FBDFAA;
 
       display: flex;
       flex-direction: row;
+
+      h3{
+        color: #FFF;
+        opacity: 100%;
+      }
     }
   }
 }
