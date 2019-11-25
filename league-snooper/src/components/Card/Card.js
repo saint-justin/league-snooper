@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 
 class Card extends Component {
 	constructor(props){
@@ -33,8 +32,8 @@ class Card extends Component {
   return (
     // NOTE: Default art size is 308x560
     <div className="card-wrapper">
-			<img className="splash-img" src={this.state.splashLink}></img>
-			<img className="mastery-img" src={this.state.masteryLink}></img>
+			<img className="splash-img" src={this.state.splashLink} alt={`${this.state.champName} Splash`}></img>
+			<img className="mastery-img" src={this.state.masteryLink} alt="Mastery"></img>
 			<div className="mastery-stats">
 				<h2 className="champ-name">{this.state.champName}</h2>
 				<div className="mastery-progress">

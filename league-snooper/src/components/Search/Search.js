@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { CallRGAPI } from '../../actions'
+// import { useSelector, useDispatch } from 'react-redux';
+// import { CallRGAPI } from '../../actions'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
@@ -24,6 +24,8 @@ class Search extends Component {
     this.handleTextUpdate = this.handleTextUpdate.bind(this);
     this.handleRegionUpdate = this.handleRegionUpdate.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+
+    //const dispatch = useDispatch();
   }
 
   // Handles updates to the region sectoin
@@ -39,7 +41,7 @@ class Search extends Component {
 
   // Handles the submit button being pressed firing off api requests
   handleSubmit(event){
-    useDispatch(CallRGAPI(this.state.region, this.state.summoner));
+    
   }
 
   // Generates <option> jsx syntax for each region passed in and returns the set

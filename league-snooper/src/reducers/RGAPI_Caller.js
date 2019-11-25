@@ -21,8 +21,9 @@ function makeCall(_url){
 const RGAPI_Reducer = (state={}, action) => {
   switch(action.type){
     case 'GET_SUMM':
-      let data = makeCall(action.payload);
-      return state + action.payload;
+
+      //let data = makeCall(action.payload);
+      return "Hello World";
     default:       
       return null;
   }
