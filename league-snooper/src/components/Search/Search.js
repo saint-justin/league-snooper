@@ -59,9 +59,6 @@ class Search extends Component {
         let newCardSet = [];
         for(let i=0; i<8; i++){
           let champNumber = this.state.calldata[i].championId;
-
-          console.log(this.state.champ_ids);
-
           let champName = this.state.champ_ids[champNumber];
           newCardSet.push(<Card
             champName={champName}
