@@ -26,6 +26,8 @@ class Card extends Component {
 				return "MonkeyKing";
 			else if (replacement == "ChoGath")
 				return "Chogath";
+			else if (replacement == "KaiSa")
+				return "Kaisa";
 			else
 				return replacement;
 		}
@@ -77,7 +79,6 @@ class Card extends Component {
 				width: `100%`
 			}
 		}
-
 	}
 
  render(){

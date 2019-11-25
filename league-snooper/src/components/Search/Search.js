@@ -3,6 +3,7 @@ import Card from '../Card/Card';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import ChampIDs from './champions-default.json';
+import Parent from '../../content/Homepage'
 
 const allRegions = ["na1", "nr1", "eun1", "euw1", "jp1", "kr", "la1", "la2", "oc1", "tr1", "ru"];
 
@@ -17,17 +18,22 @@ class Search extends Component {
       summonerdata: {},
       calldata: {},
       champ_ids: ChampIDs,
-      cards: []
+      cards: [],
     }
     // Bind all action handlers
     this.handleTextUpdate = this.handleTextUpdate.bind(this);
     this.handleRegionUpdate = this.handleRegionUpdate.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.updateWrapper = this.updateWrapper.bind(this);
+  }
+
+  // Update the parent wrapper's bg height
+  updateWrapper = () => {
+    this.props.updateWrapper()
   }
 
   // Handles updates to the region sectoin
-  handleRegionUpdate(event)
-  {
+  handleRegionUpdate(event){
     this.setState({region: event.target.value})
   }
 
@@ -69,9 +75,9 @@ class Search extends Component {
         // Set the card list into the cards prop
         this.setState({cards: newCardSet})
       })
-      })
+    })
 
-
+    this.state.updateParentStyle();
   }
 
   // Generates <option> jsx syntax for each region passed in and returns the set
@@ -115,15 +121,7 @@ class Search extends Component {
         </form>
         <div id="info-cards">
           {this.state.cards}
-            {/* <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card /> */}
-          </div>
+        </div>
       </>
     )
   } 
