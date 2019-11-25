@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import mastery1 from '../../assets/mastery_1.png';
+import mastery2 from '../../assets/mastery_2.png';
+import mastery3 from '../../assets/mastery_3.png';
 
 class Card extends Component {
 	constructor(props){
@@ -12,20 +15,52 @@ class Card extends Component {
     masteryLevel={this.state.calldata[i].championLevel}
 		*/
 
-		// Format champion names for urls by removing spaces and apastrophes
+		// Format champion names for urls by removing spaces and apastrophes then only making the first letter capitalized
 		const formatChampName = (_string) => {
-			return _string.replace(`'`, '').replace(' ', '');
+			let replacement = _string.replace(`'`, '').replace(' ', '').replace(' ', '').replace('&', '');
+			if (replacement == "NunuWillump")
+				return "Nunu";
+			else if (replacement == "VelKoz")
+				return "Velkoz";
+			else if (replacement == "Wukong")
+				return "MonkeyKing";
+			else if (replacement == "ChoGath")
+				return "Chogath";
+			else
+				return replacement;
+		}
+
+		// Data dragon only has images for master 4-7 so we need to manually load hand-made iamges for 1, 2, or 3
+		const setMastery = (_masteryLevel) => {
+			if (_masteryLevel == 0){
+				return null;
+			}
+
+			let masteryLink = "";
+			switch(_masteryLevel){
+				case 0:
+						masteryLink = "NONE";
+				case 1:
+						masteryLink = mastery1;
+				case 2:
+						masteryLink = mastery2;
+				case 3:
+						masteryLink = mastery3;
+				default:
+						masteryLink = `http://raw.communitydragon.org/latest/game/assets/ux/mastery/mastery_icon_${_masteryLevel}.png`
+			}		
+
+			return <img className="mastery-img" src={masteryLink} alt="Mastery"></img>;
 		}
 
 		this.state = {
 			splashLink: `http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${formatChampName(this.props.champName)}_0.jpg`,					// Dimensions: 308x560 rect
-			masteryLink: `http://raw.communitydragon.org/latest/game/assets/ux/mastery/mastery_icon_${this.props.masteryLevel}.png`, // Dimensions: 128x128 sq
+			masteryLink: setMastery(this.props.masteryLevel), // Dimensions: 128x128 sq
 			champName: this.props.champName,
 			experiencePercent:{},
 			masteryExp: {
 				current: this.props.champPoints,
 				tillNext: this.props.pointsToNext,
-				percent: -1
 			}
 		}
 
@@ -50,7 +85,7 @@ class Card extends Component {
     // NOTE: Default art size is 308x560
     <div className="card-wrapper" key={this.state.champName}>
 			<img className="splash-img" src={this.state.splashLink} alt={`${this.state.champName} Splash`}></img>
-			<img className="mastery-img" src={this.state.masteryLink} alt="Mastery"></img>
+			{this.state.masteryLink}
 			<div className="mastery-stats">
 				<h2 className="champ-name">{this.state.champName}</h2>
 				<h3 className="mastery-progress-text">
