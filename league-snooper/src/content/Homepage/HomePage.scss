@@ -27,6 +27,12 @@ html{
 }
 
 #logo{
-    width: 45vw;
+    width: 60%;
     margin: 20vh 0 5vh 0;
+}
+
+@media (max-width: 750px){
+    #logo{
+        width: 70%;
+    }
 }
