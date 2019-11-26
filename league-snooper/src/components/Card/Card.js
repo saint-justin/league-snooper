@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import mastery1 from '../../assets/mastery_1.png';
+// import mastery1 from '../../assets/mastery_1.png'; No longer in use
 import mastery2 from '../../assets/mastery_2.png';
 import mastery3 from '../../assets/mastery_3.png';
 
@@ -19,7 +19,7 @@ class Card extends Component {
 		const formatChampName = (_string) => {
 			let replacement = _string.replace(`'`, '').replace(' ', '').replace(' ', '').replace('&', '');
 
-			// Weird edge cases
+			// Weird edge cases for community dragon asset validation
 			if (replacement === "NunuWillump")
 				return "Nunu";
 			else if (replacement === "VelKoz" || replacement === "ChoGath" || replacement === "KaiSa" || replacement === "KhaZix" || replacement === "LeBlanc")
@@ -36,11 +36,8 @@ class Card extends Component {
 
 			let masteryLink = "";
 			switch(_masteryLevel){
-				case 0:
-					return <></>;
 				case 1:
-					masteryLink = mastery1;
-					break;
+					return <></>;
 				case 2:
 					masteryLink = mastery2;
 					break;
@@ -91,17 +88,17 @@ class Card extends Component {
   return (
     // NOTE: Default art size is 308x560
     <div className="card-wrapper" key={this.state.champName}>
-			<img className="splash-img" src={this.state.splashLink} alt={`${this.state.champName} Splash`}></img>
-			{this.state.masteryLink}
-			<div className="mastery-stats">
-				<h2 className="champ-name">{this.state.champName}</h2>
-				<h3 className="mastery-progress-text">
-					{this.state.masteryExp.current} pts.
-				</h3>
-				<div className="mastery-progress">
-  					<div className="mastery-xp-complete" style={this.state.experiencePercent}></div>
-				</div>
-			</div>
+      <img className="splash-img" src={this.state.splashLink} alt={`${this.state.champName} Splash`}></img>
+      {this.state.masteryLink}
+      <div className="mastery-stats">
+        <h2 className="champ-name">{this.state.champName}</h2>
+        <h3 className="mastery-progress-text">
+          {this.state.masteryExp.current} pts.
+        </h3>
+        <div className="mastery-progress">
+            <div className="mastery-xp-complete" style={this.state.experiencePercent}></div>
+        </div>
+      </div>
     </div>
   )
  } 

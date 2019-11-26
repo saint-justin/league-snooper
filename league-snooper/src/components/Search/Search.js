@@ -37,7 +37,7 @@ class Search extends Component {
   }
 
   handleBadRequest(event){
-    this.setState({errorMessage: <p className="error-msg">Error: Invalid Summoner</p>})
+    this.setState({errorMessage: <p className="error-msg">Error: Invalid Summoner Name. Please double-check spelling and server.</p>})
   }
 
   // Handles the submit button being pressed and firing off api requests

@@ -48,5 +48,8 @@ $input-text-col: #FAEEE8;
 
 .error-msg{
   color: red;
+  background-color: $input-bg;
+  padding: 4px;
   margin-bottom: 16px;
+  border: $input-border;
 }
