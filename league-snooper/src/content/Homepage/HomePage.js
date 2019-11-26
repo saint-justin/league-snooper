@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Search from '../../components/Search';
-import Card from '../../components/Card';
 import Logo from '../../assets/title.png';
 
 class HomePage extends Component {
@@ -25,10 +24,9 @@ class HomePage extends Component {
   render(){
     return (
       <div className="page-wrapper" style={this.state.wrapperStyle}>
-        <img src={Logo} id="logo"></img>
-        <Search updateWrapper={this.updateParentStyle}/>
+        <img src={Logo} id="logo" alt="Mastery Snooper Logo"></img>
+        <Search />
         <div className="page-content">
-
         </div>
       </div>
     )

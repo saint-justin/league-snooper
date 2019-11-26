@@ -18,38 +18,50 @@ class Card extends Component {
 		// Format champion names for urls by removing spaces and apastrophes then only making the first letter capitalized
 		const formatChampName = (_string) => {
 			let replacement = _string.replace(`'`, '').replace(' ', '').replace(' ', '').replace('&', '');
-			if (replacement == "NunuWillump")
+
+			// Weird edge cases
+			if (replacement === "NunuWillump")
 				return "Nunu";
-			else if (replacement == "VelKoz")
+			else if (replacement === "VelKoz")
 				return "Velkoz";
-			else if (replacement == "Wukong")
+			else if (replacement === "Wukong")
 				return "MonkeyKing";
-			else if (replacement == "ChoGath")
+			else if (replacement === "ChoGath")
 				return "Chogath";
-			else if (replacement == "KaiSa")
+			else if (replacement === "KaiSa")
 				return "Kaisa";
+			else if (replacement === "KhaZix")
+				return "Khazix";
 			else
 				return replacement;
 		}
 
 		// Data dragon only has images for master 4-7 so we need to manually load hand-made iamges for 1, 2, or 3
 		const setMastery = (_masteryLevel) => {
-			if (_masteryLevel == 0){
-				return null;
-			}
+			_masteryLevel = parseInt(_masteryLevel);
 
 			let masteryLink = "";
 			switch(_masteryLevel){
 				case 0:
-						masteryLink = "NONE";
+					return <></>;
 				case 1:
-						masteryLink = mastery1;
+					masteryLink = mastery1;
+					break;
 				case 2:
-						masteryLink = mastery2;
+					masteryLink = mastery2;
+					break;
 				case 3:
-						masteryLink = mastery3;
+					masteryLink = mastery3;
+					break;
+				case 4:
+				case 5:
+				case 6:
+				case 7:
+						masteryLink = `http://raw.communitydragon.org/latest/game/assets/ux/mastery/mastery_icon_${_masteryLevel}.png`;
+						break;
 				default:
-						masteryLink = `http://raw.communitydragon.org/latest/game/assets/ux/mastery/mastery_icon_${_masteryLevel}.png`
+					console.log("ERROR: " + _masteryLevel);
+						
 			}		
 
 			return <img className="mastery-img" src={masteryLink} alt="Mastery"></img>;
@@ -93,7 +105,7 @@ class Card extends Component {
 					{this.state.masteryExp.current} pts.
 				</h3>
 				<div className="mastery-progress">
-					<div className="mastery-xp-complete" style={this.state.experiencePercent}></div>
+  					<div className="mastery-xp-complete" style={this.state.experiencePercent}></div>
 				</div>
 			</div>
     </div>

@@ -1,24 +1,21 @@
 @import '../../components/Search/Search.scss';
 @import '../../components/Card/Card.scss';
 
-.page-wrapper{
+html{
     background-image: url('../../assets/bg_00.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+}
 
+.page-wrapper{
     z-index: -1;
     width: 100vw;
-    height: 100vh;
+    height: 100%;
 
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    #logo{
-        width: 45vw;
-        margin: 20vh 0 5vh 0;
-    }
 }
 
 #info-cards{
@@ -27,4 +24,9 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
+}
+
+#logo{
+    width: 45vw;
+    margin: 20vh 0 5vh 0;
 }

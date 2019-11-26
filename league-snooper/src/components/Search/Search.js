@@ -3,7 +3,6 @@ import Card from '../Card/Card';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import ChampIDs from './champions-default.json';
-import Parent from '../../content/Homepage'
 
 const allRegions = ["na1", "nr1", "eun1", "euw1", "jp1", "kr", "la1", "la2", "oc1", "tr1", "ru"];
 
@@ -24,12 +23,6 @@ class Search extends Component {
     this.handleTextUpdate = this.handleTextUpdate.bind(this);
     this.handleRegionUpdate = this.handleRegionUpdate.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.updateWrapper = this.updateWrapper.bind(this);
-  }
-
-  // Update the parent wrapper's bg height
-  updateWrapper = () => {
-    this.props.updateWrapper()
   }
 
   // Handles updates to the region sectoin
@@ -55,7 +48,6 @@ class Search extends Component {
     // Once we have the player info, use that to get their mastery info
     .then(() => {
       let masteryURL = `${this.state.base_url}mastery/${this.state.region}/${this.state.summonerdata.id}`;
-      console.log("MASTERY URL: " + masteryURL);
       fetch(masteryURL)
       .then(response => response.json())
       .then(data => this.setState({calldata: data}))
@@ -63,21 +55,26 @@ class Search extends Component {
       // Once we have mastery info set into the state, make and populate the cards with all that information
       .then(() => {
         let newCardSet = [];
-        for(let i=0; i<8; i++){
+
+        // Basic pagination but check that the looked-up user has at least this many champs owned/played
+        let max = 16;
+        if (this.state.calldata.length < max)
+          max=this.state.calldata.length;
+        for(let i=0; i<max; i++){
           let champNumber = this.state.calldata[i].championId;
-          newCardSet.push(<Card
+          newCardSet.push(
+          <Card
             champName={this.state.champ_ids[champNumber]}
             champPoints={this.state.calldata[i].championPoints}
             pointsToNext={this.state.calldata[i].championPointsUntilNextLevel}
             masteryLevel={this.state.calldata[i].championLevel}
+            key={this.state.champ_ids[champNumber]}
           />)
         }
         // Set the card list into the cards prop
         this.setState({cards: newCardSet})
       })
     })
-
-    this.state.updateParentStyle();
   }
 
   // Generates <option> jsx syntax for each region passed in and returns the set
