@@ -17,7 +17,7 @@ class Card extends Component {
 
 		// Format champion names for urls by removing spaces and apastrophes then only making the first letter capitalized
 		const formatChampName = (_string) => {
-			let replacement = _string.replace(`'`, '').replace(' ', '').replace(' ', '').replace('&', '');
+			let replacement = _string.replace(`'`, '').replace(' ', '').replace(' ', '').replace('&', '').replace(".", "");
 
 			// Weird edge cases for community dragon asset validation
 			if (replacement === "NunuWillump")
