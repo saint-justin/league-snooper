@@ -22,16 +22,10 @@ class Card extends Component {
 			// Weird edge cases
 			if (replacement === "NunuWillump")
 				return "Nunu";
-			else if (replacement === "VelKoz")
-				return "Velkoz";
+			else if (replacement === "VelKoz" || replacement === "ChoGath" || replacement === "KaiSa" || replacement === "KhaZix" || replacement === "LeBlanc")
+				return replacement.charAt(0).toUpperCase() + replacement.toLowerCase().slice(1);
 			else if (replacement === "Wukong")
 				return "MonkeyKing";
-			else if (replacement === "ChoGath")
-				return "Chogath";
-			else if (replacement === "KaiSa")
-				return "Kaisa";
-			else if (replacement === "KhaZix")
-				return "Khazix";
 			else
 				return replacement;
 		}

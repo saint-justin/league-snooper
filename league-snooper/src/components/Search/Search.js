@@ -18,6 +18,7 @@ class Search extends Component {
       calldata: {},
       champ_ids: ChampIDs,
       cards: [],
+      errorMessage: ""
     }
     // Bind all action handlers
     this.handleTextUpdate = this.handleTextUpdate.bind(this);
@@ -35,6 +36,10 @@ class Search extends Component {
     this.setState({summoner: event.target.value});
   }
 
+  handleBadRequest(event){
+    this.setState({errorMessage: <p className="error-msg">Error: Invalid Summoner</p>})
+  }
+
   // Handles the submit button being pressed and firing off api requests
   handleSubmit(event){
     event.preventDefault();
@@ -44,35 +49,42 @@ class Search extends Component {
     fetch(fullURL)
     .then(response => response.json())
     .then(data => this.setState({summonerdata: data}))
-
-    // Once we have the player info, use that to get their mastery info
     .then(() => {
       let masteryURL = `${this.state.base_url}mastery/${this.state.region}/${this.state.summonerdata.id}`;
       fetch(masteryURL)
       .then(response => response.json())
       .then(data => this.setState({calldata: data}))
-
-      // Once we have mastery info set into the state, make and populate the cards with all that information
+  
+        // Once we have mastery info set into the state, make and populate the cards with all that information
       .then(() => {
-        let newCardSet = [];
+        try {
+          let newCardSet = [];
+          // Basic pagination but check that the looked-up user has at least this many champs owned/played
+          let max = 16;
+          if (this.state.calldata.length < max)
+            max=this.state.calldata.length;
+          for(let i=0; i<max; i++){
+            let champNumber = this.state.calldata[i].championId;
+            newCardSet.push(
+            <Card
+              champName={this.state.champ_ids[champNumber]}
+              champPoints={this.state.calldata[i].championPoints}
+              pointsToNext={this.state.calldata[i].championPointsUntilNextLevel}
+              masteryLevel={this.state.calldata[i].championLevel}
+              key={this.state.champ_ids[champNumber]}
+            />)
+          }
 
-        // Basic pagination but check that the looked-up user has at least this many champs owned/played
-        let max = 16;
-        if (this.state.calldata.length < max)
-          max=this.state.calldata.length;
-        for(let i=0; i<max; i++){
-          let champNumber = this.state.calldata[i].championId;
-          newCardSet.push(
-          <Card
-            champName={this.state.champ_ids[champNumber]}
-            champPoints={this.state.calldata[i].championPoints}
-            pointsToNext={this.state.calldata[i].championPointsUntilNextLevel}
-            masteryLevel={this.state.calldata[i].championLevel}
-            key={this.state.champ_ids[champNumber]}
-          />)
+          // Update the state of the cards and clear any existing error messages
+          this.setState({cards: newCardSet})
+          this.setState({errorMessage: ""})
+
+        } catch (error) {
+          console.log("ERROR: " + error);
+          this.handleBadRequest();
         }
+
         // Set the card list into the cards prop
-        this.setState({cards: newCardSet})
       })
     })
   }
@@ -94,6 +106,7 @@ class Search extends Component {
   render(){
     return (
       <>
+        {this.state.errorMessage}
         <form className="search"> 
           <select className="search-core search-dropdown" 
             name="region" 
