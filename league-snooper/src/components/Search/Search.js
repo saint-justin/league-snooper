@@ -83,8 +83,6 @@ class Search extends Component {
           console.log("ERROR: " + error);
           this.handleBadRequest();
         }
-
-        // Set the card list into the cards prop
       })
     })
   }
