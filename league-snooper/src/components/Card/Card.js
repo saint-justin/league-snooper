@@ -81,20 +81,20 @@ class Card extends Component {
   	return (
       // NOTE: Default art size is 308x560
       <div className="card-wrapper" key={this.state.champName}>
-      <img className="splash-img" src={this.state.splashLink} alt={`${this.state.champName} Splash`}></img>
-      {this.state.masteryLink}
-      <div className="mastery-stats">
-        <h2 className="champ-name">{this.state.champName}</h2>
-        <h3 className="mastery-progress-text">
-          {this.state.masteryExp.current} pts.
-        </h3>
-        <div className="mastery-progress">
-            <div className="mastery-xp-complete" style={this.state.experiencePercent}></div>
+        <img className="splash-img" src={this.state.splashLink} alt={`${this.state.champName} Splash`}></img>
+        {this.state.masteryLink}
+        <div className="mastery-stats">
+          <h2 className="champ-name">{this.state.champName}</h2>
+          <h3 className="mastery-progress-text">
+            {this.state.masteryExp.current} pts.
+          </h3>
+          <div className="mastery-progress">
+              <div className="mastery-xp-complete" style={this.state.experiencePercent}></div>
+          </div>
         </div>
       </div>
-    </div>
-  )
- } 
+    )
+  } 
 };
 
 export default Card;

@@ -96,19 +96,14 @@ class Search extends Component {
     return <>{regionJSX}</>
   }
 
-  // Generates all <Card /> elements that go into the hotloaded cards section
-  generateCards(){
-
-  }
-
   render(){
     return (
       <>
         {this.state.errorMessage}
-        <form className="search"> 
+        <form className="search">
           <select className="search-core search-dropdown" 
-            name="region" 
-            onChange={this.handleRegionUpdate}
+          name="region" 
+          onChange={this.handleRegionUpdate}
           >
             {this.generateRegions(allRegions)}
           </select>
