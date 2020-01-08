@@ -36,10 +36,12 @@ class Search extends Component {
     this.setState({summoner: event.target.value});
   }
 
+  // Handles requests for materials that dont exist (ex. a player named `AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA`)
   handleBadRequest(event){
     this.setState({errorMessage: <p className="error-msg">Error: Invalid Summoner Name. Please double-check spelling and server.</p>})
   }
 
+  // TODO: Clean up and simplify this fxn using Await/Async
   // Handles the submit button being pressed and firing off api requests
   handleSubmit(event){
     event.preventDefault();
@@ -62,7 +64,7 @@ class Search extends Component {
           // Basic pagination but check that the looked-up user has at least this many champs owned/played
           let max = 16;
           if (this.state.calldata.length < max)
-            max=this.state.calldata.length;
+            max = this.state.calldata.length;
           for(let i=0; i<max; i++){
             let champNumber = this.state.calldata[i].championId;
             newCardSet.push(
@@ -88,8 +90,8 @@ class Search extends Component {
   }
 
   // Generates <option> jsx syntax for each region passed in and returns the set
-  generateRegions(_arr){
-    let regionJSX = _arr.map((region) => {
+  generateRegions(arr){
+    let regionJSX = arr.map((region) => {
       return <option href="/" key={region} value={region}>{region.toUpperCase()}</option>
     })
 
